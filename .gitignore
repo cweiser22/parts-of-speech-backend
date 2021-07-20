@@ -1,6 +1,7 @@
 .vscode
 .venv
 venv
+venv/
 app/.env
 
 forge.yaml
