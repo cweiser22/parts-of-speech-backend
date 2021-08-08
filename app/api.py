@@ -3,6 +3,7 @@ import os
 from dotenv import load_dotenv, find_dotenv
 from fastapi import FastAPI, Body
 from starlette.responses import RedirectResponse
+from fastapi.middleware.cors import CORSMiddleware
 import spacy
 import srsly
 
@@ -26,6 +27,20 @@ app = FastAPI(
     openapi_prefix=prefix,
 )
 
+origins = [
+
+    "http://localhost",
+    "http://localhost:3000",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 # load example request for docs
 example_request = srsly.read_json("app/data/example_request.json")
 
@@ -44,7 +59,7 @@ def docs_redirect():
 
 
 # api route to get POS data
-@app.post("/pos", tags=["NER"], response_model=POSMultipleResponse)
+@app.post("/pos", tags=["POS Tagging"], response_model=POSMultipleResponse)
 async def extract_pos(body: POSMultipleRequest = Body(..., example=example_request)):
     documents = []
 
