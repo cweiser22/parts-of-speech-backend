@@ -31,7 +31,7 @@ origins = [
 
     "http://localhost",
     "http://localhost:3000",
-    "http://143.198.98.65:3000/",
+    "http://143.198.98.65:3000",
     "http://143.198.98.65"
 ]
 
